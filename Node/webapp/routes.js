@@ -12,7 +12,21 @@
 
 // ------------ BEGIN MODULE SCOPE VARIABLES --------------
 'use strict';
-var configRoutes;
+var
+  configRoutes,
+  mongodb     = require( 'mongodb' ),
+
+  mongoServer = new mongodb.Server(
+    'localhost',
+    mongodb.Connection.DEFAULT_PORT
+  ),
+  dbHandle    = new mongodb.Db(
+    'spa', mongoServer, { safe : true }
+  );
+
+dbHandle.open( function () {
+  console.log( '** Connected to MongoDB **' );
+});
 // ------------- END MODULE SCOPE VARIABLES ---------------
 
 // ---------------- BEGIN PUBLIC METHODS ------------------
